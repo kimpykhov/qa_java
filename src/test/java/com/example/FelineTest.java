@@ -34,20 +34,17 @@ public class FelineTest {
 
     @Test
     public void getFamily() {
-        feline.getFamily();
         Assert.assertEquals("Кошачьи", feline.getFamily());
     }
 
     @Test
     public void getKittens() {
-        feline.getKittens();
         Assert.assertEquals(1, feline.getKittens());
     }
 
     @Test
     public void testGetKittens() {
         int amount = 3;
-        feline.getKittens(amount);
         Assert.assertEquals(amount, feline.getKittens(amount));
     }
 }

@@ -1,6 +1,7 @@
 package com.example;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -11,30 +12,31 @@ import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
+    private Lion lion;
 
     @Mock
     Feline feline;
 
+    @Before
+    public void setUp() throws Exception {
+        lion = new Lion("Самец", feline);
+    }
+
     @Test
     public void testGetKittens() throws Exception{
-        Feline feline = new Feline();
-        Lion lion = new Lion("Самец", feline);
         int amount = 3;
-        lion.getKittens();
-        Assert.assertEquals(amount, feline.getKittens(3));
+        Mockito.when(feline.getKittens()).thenReturn(amount);
+        Assert.assertEquals(amount, lion.getKittens());
     }
 
     @Test
     public void doesHaveMane() throws Exception {
-        Lion lion = new Lion("Самец", feline);
-        lion.doesHaveMane();
         Assert.assertEquals(true, lion.doesHaveMane());
     }
 
     @Test
-    public void doesHaveManeBaba() throws Exception {
+    public void doesHaveManeFemale() throws Exception {
         Lion lion = new Lion("Самка", feline);
-        lion.doesHaveMane();
         Assert.assertEquals(false, lion.doesHaveMane());
     }
 
@@ -52,7 +54,6 @@ public class LionTest {
 
     @Test
     public void getFoods() throws Exception{
-        Lion lion = new Lion("Самец", feline);
         List<String> expectedListFood =  List.of("Животные", "Птицы", "Рыба");
         Mockito.when(lion.getFood()).thenReturn(expectedListFood);
         List<String> actualListFood =  lion.getFood();
