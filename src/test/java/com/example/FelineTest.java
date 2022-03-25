@@ -16,8 +16,6 @@ import java.util.List;
 public class FelineTest {
 
     private Feline feline;
-    @Spy
-    private Feline felineSpy = new Feline();
 
     @Before
     public void setUp() {
@@ -27,8 +25,7 @@ public class FelineTest {
     @Test
     public void eatMeat() throws Exception {
         List<String> expectedListFood =  List.of("Животные", "Птицы", "Рыба");
-        Mockito.when(felineSpy.getFood("Хищник")).thenReturn(expectedListFood);
-        List<String> actualListFood = felineSpy.eatMeat();
+        List<String> actualListFood = feline.eatMeat();
         Assert.assertEquals(expectedListFood, actualListFood);
     }
 
